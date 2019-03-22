@@ -1,0 +1,26 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+
+    # mysql 配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/blog?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: artolia
+
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      path: /h2-console
+      enabled: true
+
+mybatis:
+#  mapper-locations:
+#    - classpath:com/artolia/blog/mapper/*/*.xml
+#  type-aliases-package: com/artolia/blog/domain
+  configuration:
+    map-underscore-to-camel-case: true

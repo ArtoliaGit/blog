@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.artolia.blog.mapper.user.UserMapper">
+    
+    <resultMap id="userMap" type="com.artolia.blog.domain.auth.User">
+        <result property="userId" column="user_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="createTime" column="create_time" />
+        <collection property="roles" ofType="com.artolia.blog.domain.auth.Role" column="user_id">
+            <result property="roleId" column="role_id" />
+            <result property="roleName" column="role_name" />
+            <result property="createTime" column="create_time" />
+        </collection>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="string"
+            resultMap="userMap">
+        select a.*, c.*
+        from user a left join user_roles b on a.user_id = b.user_id left join role c on b.role_id = c.role_id
+        where username = #{username}
+    </select>
+
+    <insert id="save" parameterType="com.artolia.blog.domain.auth.User"
+            useGeneratedKeys="true" keyProperty="userId">
+        insert into user(username, password, create_time)
+        values(#{username}, #{password}, now())
+    </insert>
+</mapper>
