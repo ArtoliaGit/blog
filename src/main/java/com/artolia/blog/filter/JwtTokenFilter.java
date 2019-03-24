@@ -1,6 +1,6 @@
 package com.artolia.blog.filter;
 
-import com.artolia.blog.common.Const;
+import com.artolia.blog.common.auth.Const;
 import com.artolia.blog.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

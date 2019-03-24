@@ -1,6 +1,6 @@
 package com.artolia.blog.util;
 
-import com.artolia.blog.common.Const;
+import com.artolia.blog.common.auth.Const;
 import com.artolia.blog.domain.auth.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -90,7 +90,7 @@ public class JwtTokenUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
+        return Const.TOKEN_PREFIX + generateToken(claims);
     }
 
     private String generateToken(Map<String, Object> claims) {

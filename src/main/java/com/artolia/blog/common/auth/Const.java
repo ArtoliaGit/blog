@@ -1,4 +1,4 @@
-package com.artolia.blog.common;
+package com.artolia.blog.common.auth;
 
 /**
  * @author artolia

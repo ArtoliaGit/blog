@@ -1,5 +1,6 @@
 package com.artolia.blog.service.impl.auth;
 
+import com.artolia.blog.common.Result;
 import com.artolia.blog.domain.auth.User;
 import com.artolia.blog.mapper.user.UserMapper;
 import com.artolia.blog.service.auth.AuthService;
@@ -34,7 +35,8 @@ public class AuthServiceImpl implements AuthService {
     private UserMapper userMapper;
 
     @Override
-    public User register(User user) {
+    public Result register(User user) {
+        Result<User> result = new Result<>();
         final String username = user.getUsername();
         if (userMapper.findByUsername(username) != null) {
             return null;
@@ -43,16 +45,25 @@ public class AuthServiceImpl implements AuthService {
         final String password = user.getPassword();
         user.setPassword(encoder.encode(password));
         userMapper.save(user);
-        return user;
+
+        result.setCode(200);
+        result.setMessage("注册成功");
+        result.setData(user);
+        return result;
     }
 
     @Override
-    public String login(String username, String password) {
+    public Result login(String username, String password) {
+        Result<String> result = new Result<>();
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return "Bearer" + token;
+
+        result.setCode(200);
+        result.setMessage("登录成功");
+        result.setData(token);
+        return result;
     }
 }

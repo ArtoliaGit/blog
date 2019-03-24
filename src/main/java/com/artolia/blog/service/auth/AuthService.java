@@ -1,5 +1,6 @@
 package com.artolia.blog.service.auth;
 
+import com.artolia.blog.common.Result;
 import com.artolia.blog.domain.auth.User;
 
 public interface AuthService {
@@ -8,7 +9,7 @@ public interface AuthService {
      * @param user 新增用户
      * @return
      */
-    User register(User user);
+    Result register(User user);
 
     /**
      * 登录
@@ -16,5 +17,5 @@ public interface AuthService {
      * @param password 密码
      * @return
      */
-    String login(String username, String password);
+    Result login(String username, String password);
 }
