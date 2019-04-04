@@ -3,9 +3,11 @@ package com.artolia.blog.web.auth;
 import com.artolia.blog.domain.auth.User;
 import com.artolia.blog.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.AuthenticationException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Artolia Pendragon

@@ -18,9 +18,25 @@ spring:
       path: /h2-console
       enabled: true
 
-mybatis:
+#mybatis:
 #  mapper-locations:
 #    - classpath:com/artolia/blog/mapper/*/*.xml
 #  type-aliases-package: com/artolia/blog/domain
-  configuration:
-    map-underscore-to-camel-case: true
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+swagger:
+  enabled: true
+  title: blog
+  description: blog api文档
+  version: 1.0.0 RELEASE
+
+  ui-config:
+    json-editor: true
+    show-request-headers: true
+    request-timeout: 5000
+
+  authorization:
+    name: Authorization
+    type: ApiKey
+    key-name: Authorization
