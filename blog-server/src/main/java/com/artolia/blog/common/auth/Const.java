@@ -6,7 +6,7 @@ package com.artolia.blog.common.auth;
 public class Const {
 
     public static final long EXPIRATION_TIME = 432_000_000;
-    public static final String SECRET = "artolia_BearereyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1NTMyMzg4MjAxOTIsImV4cCI6MTk4NTIzODgyMH0.0g5s3BEMnwpzjO2-Bg_ga6b3pKdynhzdbPDhHNVVMw6ck6Hh6YAjb_zJCx9cR4meRv4l56kxrvA_rJgD4r7Q0A";
+    public static final String SECRET = "799a23c9e2a5615c9500eabe380eb1d6604c728ee9a30c43ba58a0b3eb62c899ba1c353be7d17d5084f97b4e02ec59d32161124fc115e546f65df40767e29c00";
     public static final String TOKEN_PREFIX = "Bearer";
     public static final String HEADER_STRING = "Authorization";
 }

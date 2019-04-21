@@ -50,14 +50,15 @@ const hasAccess = (access, route) => {
  * @param {Array} access 权限
  * @param {Array} routes 路由列表
  */
+/* eslint array-callback-return: 0, no-else-return: 0 */
 export const canTurnTo = (name, access, routes) => {
   const routePermissionJudge = list => list.some((item) => {
     if (item.children && item.children.length > 0) {
-      routePermissionJudge(item.children);
+      return routePermissionJudge(item.children);
     } else if (item.name === name) {
       return hasAccess(access, item);
     }
-    return false;
+    // return false;
   });
   return routePermissionJudge(routes);
 };
@@ -131,6 +132,32 @@ export const getMenuByRouter = (routers, access) => {
         res.push(obj);
       }
     }
+  });
+  return res;
+};
+
+/**
+ * @description 设置路由权限
+ * @param {Array} routers 路由列表
+ * @param {Array} resource 权限
+ */
+export const getRouterAccess = (routers, resource, role) => {
+  const res = [];
+  routers.forEach((item) => {
+    if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
+      if (item.children && item.children.length > 0) {
+        getRouterAccess(item.children, resource, role);
+      }
+      if (resource.includes(item.name)) {
+        if (item.meta.access && !item.meta.access.includes(role)) {
+          item.meta.access.push(role);
+        } else if (!item.meta.access || item.meta.access.length === 0) {
+          item.meta.access = [role];
+        }
+      }
+      if (!item.meta.access) item.meta.access = [];
+    }
+    res.push(item);
   });
   return res;
 };

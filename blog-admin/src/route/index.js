@@ -17,6 +17,8 @@ const { homeName } = config;
 
 Vue.use(Router);
 
+NProgress.configure({ showSpinner: false });
+
 const router = new Router({
   routes,
   mode: 'history',
@@ -28,8 +30,7 @@ const turnTo = (to, access, next) => {
   if (canTurnTo(to.name, access, routes)) {
     next();
   } else {
-    // next({ replace: true, name: 'error_401' });
-    next();
+    next({ replace: true, name: 'error_401' });
   }
 };
 

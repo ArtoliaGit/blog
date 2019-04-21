@@ -2,13 +2,13 @@ import
 {
   login,
   getUserInfo,
-  logout,
 } from '@/api/login';
 import
 {
   getToken,
   setToken,
 } from '@/utils/utils';
+import router from '@/route';
 
 export default {
   state: {
@@ -19,6 +19,7 @@ export default {
     hasGetInfo: false,
     access: [],
     roleList: [],
+    resource: [],
   },
   mutations: {
     SET_USERNAME(state, userName) {
@@ -42,6 +43,9 @@ export default {
     },
     SET_ROLELIST(state, roleList) {
       state.roleList = roleList;
+    },
+    SET_RESOURCE(state, resource) {
+      state.resource = resource;
     },
   },
   getters: {
@@ -69,12 +73,10 @@ export default {
      * @description 退出登陆
      */
     handleLogout({ commit }) {
-      return new Promise((resovle, reject) => {
-        logout().then(() => {
-          commit('SET_TOKEN', '');
-          commit('SET_ACCESS', []);
-          resovle();
-        }).catch(error => reject(error));
+      commit('SET_TOKEN', '');
+      commit('SET_ACCESS', []);
+      router.push({
+        name: 'login',
       });
     },
     /**
@@ -91,8 +93,10 @@ export default {
             commit('SET_HASGETINFO', true);
             const access = data.roles.map(item => item.roleName);
             commit('SET_ACCESS', access);
+            if (data.roles && data.roles[0].resource) {
+              commit('SET_RESOURCE', data.roles[0].resource);
+            }
             data.access = access;
-            console.log(data);
             resolve(data);
           } else {
             reject(res);

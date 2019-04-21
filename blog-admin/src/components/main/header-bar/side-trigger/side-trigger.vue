@@ -1,9 +1,8 @@
 <template>
   <div>
     <i
-      class="fa fa-bars"
-      aria-hidden="true"
-      :style="{transform: (isCollapse ? 'rotate(90deg)' : 'rotate(0deg)')}"
+      class="iconfont icon-nav"
+      :style="{transform: (isCollapse ? 'rotate(90deg)' : 'rotate(0deg)'), display: 'inline-block'}"
       @click="handleClick"
     />
   </div>

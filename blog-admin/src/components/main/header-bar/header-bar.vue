@@ -6,10 +6,14 @@
       @on-change="handleCollapsedChange"
     />
     <custom-bread-crumb class="custom-bread-crumb" :list="breadCrumbList" />
+    <div class="right-menu">
+      <el-button type="primary" @click="handleLogout">退出登陆</el-button>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import CustomBreadCrumb from './custom-bread-crumb';
 import SideTrigger from './side-trigger';
 
@@ -31,8 +35,14 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      'handleLogout',
+    ]),
     handleCollapsedChange(state) {
       this.$emit('on-collapse', state);
+    },
+    logout() {
+      this.handleLogout();
     },
   },
 };

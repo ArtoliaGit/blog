@@ -52,7 +52,6 @@ export default {
   },
   computed: {
     menuList() {
-      console.log(this.$store.getters.menuList);
       return this.$store.getters.menuList;
     },
     tagNavList() {

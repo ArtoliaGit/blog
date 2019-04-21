@@ -1,14 +1,15 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <el-menu
-      :default-active="$route.path"
+      ref="menu"
+      :default-active="getRouteIndex"
       :collapse="isCollapse"
       mode="vertical"
       :router="true"
       background-color="#304156"
       text-color="#bfcbd9"
       active-text-color="#409eff"
-      :style="{width: (isCollapse ? 'auto' : '250px') + '!important'}"
+      class="el-menu-vertical-custom"
     >
       <template v-for="item in menuList">
         <template v-if="!item.children || (item.children && item.children.length === 0)">
@@ -32,6 +33,11 @@ export default {
   name: 'SideMenu',
   components: {
     SidebarItem,
+  },
+  computed: {
+    getRouteIndex() {
+      return this.$route.name;
+    },
   },
   props: {
     menuList: {

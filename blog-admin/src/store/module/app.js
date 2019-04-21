@@ -11,6 +11,7 @@ import
   getNextRoute,
   routeHasExist,
   getRouteTitleHandled,
+  getRouterAccess,
 } from '@/utils/utils';
 import config from '@/config';
 
@@ -66,7 +67,13 @@ export default {
     },
   },
   getters: {
-    menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access),
+    menuList: (state, getters, rootState) => {
+      let accessRouters = routers;
+      if (!rootState.user.access.includes('ROLE_ADMIN')) {
+        accessRouters = getRouterAccess(routers, rootState.user.resource, rootState.user.access[0]);
+      }
+      return getMenuByRouter(accessRouters, rootState.user.access);
+    },
   },
   actions: {
 

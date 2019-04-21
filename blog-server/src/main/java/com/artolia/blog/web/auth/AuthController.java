@@ -24,8 +24,4 @@ public class AuthController {
         return authService.login(user.getUsername(), user.getPassword()).toJson();
     }
 
-    @PostMapping("/regiter")
-    public String register(@RequestBody User user) throws AuthenticationException {
-        return authService.register(user).toJson();
-    }
 }

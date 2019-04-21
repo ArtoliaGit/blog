@@ -7,17 +7,14 @@
         <result property="username" column="username" />
         <result property="password" column="password" />
         <result property="createTime" column="create_time" />
-        <collection property="roles" ofType="com.artolia.blog.domain.auth.Role" column="user_id">
-            <result property="roleId" column="role_id" />
-            <result property="roleName" column="role_name" />
-            <result property="createTime" column="create_time" />
-        </collection>
+        <collection property="roles" ofType="com.artolia.blog.domain.auth.Role" column="user_id"
+            select="com.artolia.blog.mapper.role.RoleMapper.getRolesByUser" />
     </resultMap>
 
     <select id="findByUsername" parameterType="string"
             resultMap="userMap">
-        select a.*, c.*
-        from user a left join user_roles b on a.user_id = b.user_id left join role c on b.role_id = c.role_id
+        select *
+        from user
         where username = #{username}
     </select>
 
@@ -26,4 +23,14 @@
         insert into user(username, password, create_time)
         values(#{username}, #{password}, now())
     </insert>
+
+    <select id="getUserList" parameterType="java.util.Map"
+            resultType="com.artolia.blog.domain.auth.User">
+        select user_id, username, person_name, status, create_time, create_user from user
+        <where>
+            <if test="params.username != null and params.username != ''">
+                username = #{params.username}
+            </if>
+        </where>
+    </select>
 </mapper>

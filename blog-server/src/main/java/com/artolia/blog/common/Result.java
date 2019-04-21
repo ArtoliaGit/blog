@@ -19,6 +19,7 @@ public class Result<T> implements Serializable {
     private Integer code;
     private String message;
     private T data;
+    private long total;
 
     public String toJson() {
         Gson gson = new Gson();

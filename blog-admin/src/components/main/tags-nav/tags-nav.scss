@@ -35,7 +35,7 @@
     z-index: 10;
     button{
       padding: 6px 4px;
-      line-height: 14px;
+      line-height: 2.2;
       text-align: center;
     }
     &.left-btn{
@@ -101,7 +101,7 @@
         .el-icon-close {
           width: 16px;
           height: 16px;
-          vertical-align: 2px;
+          vertical-align: 1px;
           border-radius: 50%;
           text-align: center;
           transition: all .3s cubic-bezier(.645, .045, .355, 1);
@@ -109,7 +109,7 @@
           &:before {
             transform: scale(.6);
             display: inline-block;
-            vertical-align: -3px;
+            vertical-align: -2px;
           }
           &:hover {
             background-color: #b4bccc;

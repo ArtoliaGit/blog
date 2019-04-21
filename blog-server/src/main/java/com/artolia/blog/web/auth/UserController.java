@@ -1,10 +1,13 @@
 package com.artolia.blog.web.auth;
 
+import com.artolia.blog.domain.auth.User;
 import com.artolia.blog.service.auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Artolia Pendragon
@@ -22,5 +25,28 @@ public class UserController {
     @GetMapping("/getUserInfo")
     public String getUserInfo() {
         return userService.getUserInfo().toJson();
+    }
+
+    @GetMapping("/getUserList")
+    public String getUserList(HttpServletRequest request) {
+        String page = request.getParameter("page");
+        String pageSize = request.getParameter("pageSize");
+        String username = request.getParameter("username");
+        Map<String, Object> params = new HashMap<>(8);
+        params.put("page", page);
+        params.put("pageSize", pageSize);
+        params.put("username", username);
+        return userService.getUserList(params).toJson();
+    }
+
+    @PostMapping("/save")
+    public String save(@RequestBody User user, HttpServletRequest request) {
+        String op = request.getParameter("op");
+        return userService.save(user, op).toJson();
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam int userId) {
+        return userService.delete(userId).toJson();
     }
 }

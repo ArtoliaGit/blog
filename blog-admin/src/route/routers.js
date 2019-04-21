@@ -43,20 +43,43 @@ export default [
           hideInMenu: true,
           title: '首页',
           notCache: true,
-          icon: 'fa fa-home',
+          icon: 'iconfont icon-home',
         },
         component: () => import('@/views/Home'),
       },
     ],
   },
   {
-    path: '',
-    name: 'doc',
+    path: '/systemConfig',
+    name: 'SystemConfig',
     meta: {
-      title: '文档',
-      href: 'https://lison16.github.io/iview-admin-doc/#/',
-      icon: 'fa fa-file-text-o',
+      access: ['ROLE_ADMIN'],
+      icon: 'iconfont icon-systemmanage',
+      title: '系统管理',
     },
+    component: Main,
+    children: [
+      {
+        path: 'userList',
+        name: 'User',
+        meta: {
+          access: ['ROLE_ADMIN'],
+          icon: 'iconfont icon-user',
+          title: '用户管理',
+        },
+        component: () => import('@/views/user'),
+      },
+      {
+        path: 'roleList',
+        name: 'Role',
+        meta: {
+          access: ['ROLE_ADMIN'],
+          icon: 'iconfont icon-role',
+          title: '角色管理',
+        },
+        component: () => import('@/views/role'),
+      },
+    ],
   },
   {
     path: '/components',
@@ -80,7 +103,7 @@ export default [
             path: 'message_page1',
             name: 'message_page1',
             meta: {
-              access: ['ROLE_ADMINs'],
+              access: ['ROLE_ADMIN'],
               icon: 'fa fa-cog',
               title: '消息中心1',
             },
@@ -125,5 +148,29 @@ export default [
         component: () => import('@/views/Home'),
       },
     ],
+  },
+  {
+    path: '/401',
+    name: 'error_401',
+    meta: {
+      hideInMenu: true,
+    },
+    component: () => import('@/views/error-page/401.vue'),
+  },
+  {
+    path: '/500',
+    name: 'error_500',
+    meta: {
+      hideInMenu: true,
+    },
+    component: () => import('@/views/error-page/500.vue'),
+  },
+  {
+    path: '*',
+    name: 'error_404',
+    meta: {
+      hideInMenu: true,
+    },
+    component: () => import('@/views/error-page/404.vue'),
   },
 ];

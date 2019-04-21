@@ -13,7 +13,7 @@
         <el-form-item prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名">
             <template slot="prepend">
-              <i class="fa fa-user black-color" aria-hidden="true" />
+              <i class="iconfont icon-user" />
             </template>
           </el-input>
         </el-form-item>
@@ -24,11 +24,11 @@
             :type="hidePassword ? 'password' : 'text'"
           >
             <template slot="prepend">
-              <i class="fa fa-key black-color" aria-hidden="true" />
+              <i class="iconfont icon-lock-fill" />
             </template>
             <div slot="suffix" class="eye" @click="handleClickEye">
-              <i class="fa fa-eye-slash" aria-hidden="true" v-if="hidePassword" />
-              <i class="fa fa-eye" aria-hidden="true" v-else />
+              <i class="iconfont icon-eyeclose-fill" v-if="hidePassword" />
+              <i class="iconfont icon-eye-fill" v-else />
             </div>
           </el-input>
         </el-form-item>
@@ -77,8 +77,7 @@ export default {
             name: 'home',
           });
         });
-      }).catch((error) => {
-        console.log(error);
+      }).catch(() => {
         this.$message({
           type: 'error',
           message: '用户名或密码不正确',
