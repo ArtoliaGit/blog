@@ -20,8 +20,8 @@
 
     <insert id="save" parameterType="com.artolia.blog.domain.auth.User"
             useGeneratedKeys="true" keyProperty="userId">
-        insert into user(username, password, create_time)
-        values(#{username}, #{password}, now())
+        insert into user(username, password, create_time, create_user, person_name, status)
+        values(#{username}, #{password}, now(), #{createUser}, #{personName}, #{status})
     </insert>
 
     <select id="getUserList" parameterType="java.util.Map"

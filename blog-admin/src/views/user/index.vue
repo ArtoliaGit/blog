@@ -29,7 +29,7 @@
           border
           highlight-current-row
           fit
-          max-height="400"
+          :max-height="maxHeight"
           style="width: 100%"
           header-row-class-name="table-header"
           v-loading="tableLoading"
@@ -88,6 +88,16 @@
         <el-form-item label="密码" prop="password" :label-width="labelWidth" v-if="op === 'create'">
           <el-input v-model="form.password" type="password" style="width: 50%;" />
         </el-form-item>
+        <el-form-item label="角色" prop="roles" :label-width="labelWidth">
+          <el-select v-model="form.roles" multiple style="width: 50%;">
+            <el-option
+              v-for="item in roleDic"
+              :key="item.roleId"
+              :label="item.roleName"
+              :value="item.roleId"
+            />
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="handleCancel">取 消</el-button>
@@ -103,6 +113,9 @@ import {
   save,
   deleteUser,
 } from '@/api/user';
+import {
+  getRoleList,
+} from '@/api/role';
 
 export default {
   name: 'User',
@@ -125,6 +138,7 @@ export default {
         username: '',
         password: '',
         personName: '',
+        roles: [],
       },
       dialogFormVisible: false,
       labelWidth: '120px',
@@ -137,6 +151,8 @@ export default {
       query: {
         username: '',
       },
+      maxHeight: window.innerHeight - 260,
+      roleDic: [],
     };
   },
   methods: {
@@ -174,13 +190,16 @@ export default {
         username: '',
         password: '',
         personName: '',
+        roles: [],
       };
       this.op = 'create';
       this.title = '新增用户';
       this.dialogFormVisible = true;
     },
     handleSave() {
-      save(this.form, { op: this.op }).then((res) => {
+      const data = this.form;
+      data.roles = this.form.roles.map(item => ({ roleId: item }));
+      save(data, { op: this.op }).then((res) => {
         if (res.code === 200) {
           this.$message({
             type: 'success',
@@ -204,6 +223,7 @@ export default {
       this.form.username = val.username;
       this.form.personName = val.personName;
       this.form.password = val.password;
+      this.form.roles = val.roles.map(item => item.roleId);
       this.op = 'update';
       this.title = '修改用户';
       this.dialogFormVisible = true;
@@ -222,9 +242,21 @@ export default {
     refresh() {
       this.getTableData();
     },
+    getRoleDic() {
+      const params = {
+        page: 1,
+        pageSize: 1000,
+      };
+      getRoleList(params).then((res) => {
+        if (res.code === 200) {
+          this.roleDic = res.data;
+        }
+      });
+    },
   },
   mounted() {
     this.getTableData();
+    this.getRoleDic();
   },
 };
 </script>

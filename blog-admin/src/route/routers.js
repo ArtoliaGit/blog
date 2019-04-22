@@ -1,4 +1,5 @@
 import Main from '@/components/main';
+import config from '@/config';
 
 /**
  * meta除了原生参数外可配置的参数:
@@ -53,7 +54,7 @@ export default [
     path: '/systemConfig',
     name: 'SystemConfig',
     meta: {
-      access: ['ROLE_ADMIN'],
+      access: [config.super_role],
       icon: 'iconfont icon-systemmanage',
       title: '系统管理',
     },
@@ -63,7 +64,7 @@ export default [
         path: 'userList',
         name: 'User',
         meta: {
-          access: ['ROLE_ADMIN'],
+          access: [config.super_role],
           icon: 'iconfont icon-user',
           title: '用户管理',
         },
@@ -73,7 +74,7 @@ export default [
         path: 'roleList',
         name: 'Role',
         meta: {
-          access: ['ROLE_ADMIN'],
+          access: [config.super_role],
           icon: 'iconfont icon-role',
           title: '角色管理',
         },
@@ -85,7 +86,7 @@ export default [
     path: '/components',
     name: 'components',
     meta: {
-      access: ['ROLE_ADMIN'],
+      access: [config.super_role],
       icon: 'fa fa-cog',
       title: '组件',
     },
@@ -97,13 +98,14 @@ export default [
         meta: {
           icon: 'fa fa-cog',
           title: '消息中心',
+          access: [config.super_role],
         },
         children: [
           {
             path: 'message_page1',
             name: 'message_page1',
             meta: {
-              access: ['ROLE_ADMIN'],
+              access: [config.super_role],
               icon: 'fa fa-cog',
               title: '消息中心1',
             },
@@ -115,6 +117,7 @@ export default [
             meta: {
               icon: 'fa fa-cog',
               title: '消息中心2',
+              access: [config.super_role],
             },
             children: [
               {
@@ -123,6 +126,7 @@ export default [
                 meta: {
                   icon: 'fa fa-file-text-o',
                   title: '消息中心3',
+                  access: [config.super_role],
                 },
               },
               {
@@ -131,6 +135,7 @@ export default [
                 meta: {
                   icon: 'fa fa-file-text-o',
                   title: '消息中心4',
+                  access: [config.super_role],
                 },
               },
             ],
@@ -141,7 +146,7 @@ export default [
         path: 'about',
         name: 'about',
         meta: {
-          access: ['ROLE_ADMIN'],
+          access: [config.super_role],
           icon: 'fa fa-cog',
           title: '关于',
         },

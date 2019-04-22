@@ -7,7 +7,7 @@
     />
     <custom-bread-crumb class="custom-bread-crumb" :list="breadCrumbList" />
     <div class="right-menu">
-      <el-button type="primary" @click="handleLogout">退出登陆</el-button>
+      <el-button type="primary" @click="handleLogout" size="mini">退出登陆</el-button>
     </div>
   </div>
 </template>

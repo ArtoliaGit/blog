@@ -27,7 +27,7 @@
           :data="tableData"
           border
           highlight-current-row
-          max-height="400"
+          :max-height="maxHeight"
           style="width: 100%"
           header-row-class-name="table-header"
           v-loading="tableLoading"
@@ -157,6 +157,7 @@ export default {
         label: 'label',
       },
       defaultChecked: [],
+      maxHeight: window.innerHeight - 260,
     };
   },
   methods: {
@@ -284,7 +285,7 @@ export default {
     },
     getResource(resource) {
       const { menuList } = this.$store.getters;
-      let changeResource = [];
+      const changeResource = [];
       const filterResource = list => list.forEach((item) => {
         if (item.children && item.children.length > 0) {
           filterResource(item.children);

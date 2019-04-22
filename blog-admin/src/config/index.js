@@ -22,4 +22,8 @@ export default {
    * @description 配置显示在浏览器标签的title
    */
   title: 'blog',
+  /**
+   * @description 超级管理员角色
+   */
+  super_role: 'ROLE_ADMIN',
 };

@@ -5,7 +5,7 @@ import
   getMenuByRouter,
   getBreadCrumbList,
   getHomeRoute,
-  getTagNavListFromLocalstorage,
+  // getTagNavListFromLocalstorage,
   setTagNavListInLocalstorage,
   routeEqual,
   getNextRoute,
@@ -40,7 +40,10 @@ export default {
       let tagList = [];
       if (list) {
         tagList = [...list];
-      } else tagList = getTagNavListFromLocalstorage() || [];
+      } else {
+        // tagList = getTagNavListFromLocalstorage() || [];
+        tagList = [];
+      }
       if (tagList[0] && tagList[0].name !== homeName) tagList.shift();
       const homeTagIndex = tagList.findIndex(item => item.name === homeName);
       if (homeTagIndex > 0) {
@@ -69,7 +72,7 @@ export default {
   getters: {
     menuList: (state, getters, rootState) => {
       let accessRouters = routers;
-      if (!rootState.user.access.includes('ROLE_ADMIN')) {
+      if (!rootState.user.access.includes(config.super_role)) {
         accessRouters = getRouterAccess(routers, rootState.user.resource, rootState.user.access[0]);
       }
       return getMenuByRouter(accessRouters, rootState.user.access);
