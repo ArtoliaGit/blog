@@ -36,6 +36,7 @@ public class UserController {
         params.put("page", page);
         params.put("pageSize", pageSize);
         params.put("username", username);
+        String id = "123";
         return userService.getUserList(params).toJson();
     }
 
